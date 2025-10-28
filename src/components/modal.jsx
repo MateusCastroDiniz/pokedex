@@ -57,7 +57,7 @@ export default function PokemonModal({ open, handleClose, pokemon, baseColor }) 
           </Box>
         
           <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:'1rem'}}>
-              <ButtonGroup variant="text" aria-label="Basic button group" sx={{display: 'flex', justifyContent: 'space-between',}}>
+              <ButtonGroup variant="text" aria-label="Basic button group" sx={{display: 'flex', justifyContent: 'space-between'}}>
                   <Button 
                     onClick={() => setActiveTab('about')}
                     sx={{ 
