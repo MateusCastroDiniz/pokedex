@@ -6,7 +6,8 @@ import axios from 'axios';
 
 
 export default function PokemonModal({ open, handleClose, pokemon, baseColor }) {
-    const [description, setDescription] = useState('') 
+    const [description, setDescription] = useState('');
+    const [activeTab, setActiveTab] = useState('about');
 
     useEffect(() => {
         if(pokemon){
@@ -43,41 +44,113 @@ export default function PokemonModal({ open, handleClose, pokemon, baseColor }) 
         display:'flex',
         alignItems: 'center',
         overflowY: 'auto',
-        overflowX: 'hidden'
+        overflowX: 'hidden',
+        justifyContent: 'space-between',
       }}>
-        <Box sx={{display: 'flex',flexDirection: 'column', width: '100%', height: '100%'}}>
-            <Box sx={{marginBottom: '1rem'}}>
-            <Typography variant="h2">
+        <Box sx={{display: 'flex', flexDirection: 'column', width: '50%', height: '100%'}}>
+          <Box sx={{marginBottom: '1rem'}}>
+          
+            <Typography variant="h3">
             {pokemon.name.toUpperCase()} #{pokemon.id}
             </Typography>
-            </Box>
-            <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:'1rem'}}>
-                <ButtonGroup variant="text" aria-label="Basic button group" sx={{display: 'flex', justifyContent: 'space-between',}}>
-                    <Button>About</Button>
-                    <Button>Stats</Button>
-                    <Button>Evolution</Button>
-                </ButtonGroup>
-            </Box>
-            <Box sx={{ marginBottom: '1rem' }}>
+
+          </Box>
+        
+          <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:'1rem'}}>
+              <ButtonGroup variant="text" aria-label="Basic button group" sx={{display: 'flex', justifyContent: 'space-between',}}>
+                  <Button 
+                    onClick={() => setActiveTab('about')}
+                    sx={{ 
+                      borderBottom: activeTab === 'about' ? 2 : 0,
+                      borderColor: baseColor
+                    }}
+                  >
+                    About
+                  </Button>
+                  <Button 
+                    onClick={() => setActiveTab('stats')}
+                    sx={{ 
+                      borderBottom: activeTab === 'stats' ? 2 : 0,
+                      borderColor: baseColor
+                    }}
+                  >
+                    Stats
+                  </Button>
+                  <Button 
+                    onClick={() => setActiveTab('evolution')}
+                    sx={{ 
+                      borderBottom: activeTab === 'evolution' ? 2 : 0,
+                      borderColor: baseColor
+                    }}
+                  >
+                    Evolution
+                  </Button>
+              </ButtonGroup>
+          </Box>
+
+          {activeTab === 'about' && (
+            <Box>
+              <Box sx={{ marginBottom: '1rem' }}>
                 <Typography variant="body1">
                     <strong>Description:</strong> {description}
                 </Typography>
-            </Box>
-            <Box>
+              </Box>
+              <Box>
                 <Typography variant='body1'>
-                <strong>Altura:</strong> {pokemon.height / 10} m<br />
-                <strong>Peso:</strong> {pokemon.weight / 10} kg<br />
-                <strong>Tipos:</strong> {pokemon.types.map(t => t.type.name).join(', ')}<br />
-                <strong>Habilidades:</strong> {pokemon.abilities.map(a => a.ability.name).join(', ')}
+                <strong>Height:</strong> {pokemon.height / 10} m<br />
+                <strong>Weight:</strong> {pokemon.weight / 10} kg<br />
+                <strong>Types:</strong> {pokemon.types.map(t => t.type.name).join(', ')}<br />
+                <strong>Abilities:</strong> {pokemon.abilities.map(a => a.ability.name).join(', ')}
                 </Typography>
+              </Box>
             </Box>
+          )}
+
+          {activeTab === 'stats' && (
+            <Box>
+              {pokemon.stats.map((stat) => (
+                <Box key={stat.stat.name} sx={{ marginBottom: '1rem' }}>
+                  <Typography variant="body1">
+                    <strong>{stat.stat.name.toUpperCase()}:</strong> {stat.base_stat}
+                  </Typography>
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: '10px',
+                      bgcolor: '#e0e0e0',
+                      borderRadius: '5px',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: `${(stat.base_stat / 255) * 100}%`,
+                        height: '100%',
+                        bgcolor: baseColor,
+                        borderRadius: '5px',
+                      }}
+                    />
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          )}
+
+          {activeTab === 'evolution' && (
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="body1">
+                Evolution chain will be implemented here.
+              </Typography>
+            </Box>
+          )}
         </Box>
-        <Box sx={{height: '65%', width: '65%',display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
-            <img
-            src={pokemon.sprites.other['official-artwork'].front_default}
-            alt={pokemon.name}
-            style={{ width: 'auto', height: '100%', objectFit: 'contain' }}
-            />
+        <Box sx={{width: '50%', height:'100%', display: 'flex', alignItems: 'center'}}>
+          <Box sx={{height: '35%', width: '35%', display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
+              <img
+              src={pokemon.sprites.other['official-artwork'].front_default}
+              alt={pokemon.name}
+              style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+              />
+          </Box>
         </Box>
       </Box>
     </Modal>

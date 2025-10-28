@@ -16,12 +16,10 @@ function App() {
 
 
   useEffect(() => {
-    // Primeiro busca a lista de todos os pokémons (nome e url apenas)
     axios.get('https://pokeapi.co/api/v2/pokemon?limit=50')
       .then(resp => {
         const allResults = resp.data.results;
-  
-        // Agora busca os detalhes de todos os pokémons
+
         const fetchDetails = allResults.map(pokemon =>
           axios.get(pokemon.url).then(res => res.data)
         );
