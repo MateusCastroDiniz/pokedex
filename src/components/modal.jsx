@@ -101,6 +101,7 @@ export default function PokemonModal({ open, handleClose, pokemon, baseColor }) 
                 <strong>Weight:</strong> {pokemon.weight / 10} kg<br />
                 <strong>Types:</strong> {pokemon.types.map(t => t.type.name).join(', ')}<br />
                 <strong>Abilities:</strong> {pokemon.abilities.map(a => a.ability.name).join(', ')}
+                <strong>Base color: {baseColor}</strong>
                 </Typography>
               </Box>
             </Box>
@@ -139,6 +140,7 @@ export default function PokemonModal({ open, handleClose, pokemon, baseColor }) 
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="body1">
                 Evolution chain will be implemented here.
+                {pokemon.sprites.other['official-artwork'].front_default}
               </Typography>
             </Box>
           )}
@@ -146,7 +148,7 @@ export default function PokemonModal({ open, handleClose, pokemon, baseColor }) 
         <Box sx={{width: '50%', height:'100%', display: 'flex', alignItems: 'center'}}>
           <Box sx={{height: '35%', width: '35%', display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
               <img
-              src={pokemon.sprites.other['official-artwork'].front_default}
+              src={pokemon.sprites.front_default}
               alt={pokemon.name}
               style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
               />

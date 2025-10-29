@@ -17,6 +17,7 @@ import PokemonModal from './modal.jsx';
 export default function PokemonVisualizer({ pokemons }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [baseColor, setBaseColor] = useState(null)
 
   const typeColorScheme = {
     normal: {
@@ -96,13 +97,15 @@ export default function PokemonVisualizer({ pokemons }) {
   const getLocalTypeIcon = (typeName) => 
     `assets/types/gen8/${typeName.toLowerCase()}.png`;
 
-  const handleOpenModal = (pokemon) => {
+  const handleOpenModal = (pokemon, baseColor) => {
     setSelectedPokemon(pokemon);
+    setBaseColor(baseColor);
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setBaseColor('#eee')
     setSelectedPokemon(null);
   };
 
@@ -125,7 +128,7 @@ export default function PokemonVisualizer({ pokemons }) {
             return (
                 <Card
                 key={pokemon.id}
-                onClick={() => handleOpenModal(pokemon)} 
+                onClick={() => handleOpenModal(pokemon, bgColor)} 
                 sx={{
                     display: 'flex',
                     width: '100%',
@@ -152,6 +155,8 @@ export default function PokemonVisualizer({ pokemons }) {
                         <Box sx={{display: 'flex',flexDirection:'column', gap:1, padding: 2, alignItems: 'start'}}>
                             <Typography variant="body1">
                                 {`#${pokemon.id}`}
+                                {pokemon.sprites.front_default
+                                }
                             </Typography>
 
                             <Typography variant="h4" sx={{fontWeight: 'light', color: '#'}}>
@@ -188,7 +193,7 @@ export default function PokemonVisualizer({ pokemons }) {
                     }}>
                         <CardMedia
                             component="img"
-                            image={pokemon.sprites.other['official-artwork'].front_default}
+                            image={pokemon.sprites.front_default}
                             title={pokemon.name.toUpperCase()}
                             sx={{
                             objectFit: 'contain',
@@ -211,6 +216,7 @@ export default function PokemonVisualizer({ pokemons }) {
         open={modalOpen}
         handleClose={handleCloseModal}
         pokemon={selectedPokemon}
+        baseColor={baseColor}
       />
     </Box>
   );
