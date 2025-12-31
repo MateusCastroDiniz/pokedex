@@ -110,11 +110,13 @@ export default function PokemonVisualizer({ pokemons }) {
   };
 
   return (
-    <Box>
+    <Box id={"pokemons-container"} sx={{
+      width: '100%'
+    }}>
 
       {pokemons.length > 0 ? (
-        <Box sx={{
-          padding: 2,
+        <Box id={"pokemons-list"} sx={{
+          paddingY: 2,
           display: 'flex',
           flexDirection: 'column',
           gap: 2
@@ -131,9 +133,9 @@ export default function PokemonVisualizer({ pokemons }) {
                 onClick={() => handleOpenModal(pokemon, bgColor)} 
                 sx={{
                     display: 'flex',
-                    width: '100%',
-                    height: '190px',
+                    height: '120px',
                     backgroundColor: bgColor,
+                    justifyContent: 'space-between',
                     color: '#333',
                     borderRadius: 4,
                     padding: 1,
@@ -152,35 +154,58 @@ export default function PokemonVisualizer({ pokemons }) {
                     height: '100%',
                     width: '40%'
                     }}>
-                        <Box sx={{display: 'flex',flexDirection:'column', gap:1, padding: 2, alignItems: 'start'}}>
-                            <Typography variant="body1">
+                        <Box sx={{display: 'flex',flexDirection:'column', gap:1, paddingX: 2, alignItems: 'start'}}>
+                            <Typography variant="body1" sx={{fontWeight: 'bold'}}>
                                 {`#${pokemon.id}`}
-                                {pokemon.sprites.front_default
-                                }
                             </Typography>
 
-                            <Typography variant="h4" sx={{fontWeight: 'light', color: '#'}}>
+                            <Typography variant="h5" sx={{fontWeight: 'bolder', color: '#ffff'}}>
                                 {pokemon.name.toUpperCase()}
                             </Typography>
                         </Box>
-                        <CardActions sx={{gap:1}}>
+                        <CardActions sx={{width: 'fit-content'}}>
                             {pokemon.types.map(t => {
                                 const secondaryBgColor = typeColorScheme[t.type.name]?.secondary;
                                 return(
-                                    <Badge 
-                                    badgeContent={t.type.name} 
-                                    color='primary'
+                                  <Box
+                                    key={t.type.name}
                                     sx={{
-                                        '& .MuiBadge-badge': {
-                                        backgroundColor: secondaryBgColor,
-                                        color: '#fff', 
-                                        borderRadius: '8px', 
-                                        padding: '0.5em', 
-                                        },
-                                        }}
-                                        >
-                                        <Avatar src={getLocalTypeIcon(t.type.name)}/>
-                                    </Badge>
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap:1,
+                                      height: '30px',
+                                      paddingX:'5px',
+                                      borderRadius: '6px',
+                                      backgroundColor: secondaryBgColor,
+                                    }}
+                                  >
+                                    <Avatar sx={{width: 20, height: 20}} src={getLocalTypeIcon(t.type.name)} />
+
+                                    <Typography
+                                      variant='body2'
+                                      sx={{
+                                        color: '#fff',
+                                        textTransform: 'capitalize',
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      {t.type.name}
+                                    </Typography>
+                                  </Box>
+                                    // <Badge 
+                                    // badgeContent={t.type.name} 
+                                    // color='primary'
+                                    // sx={{
+                                    //     '& .MuiBadge-badge': {
+                                    //     backgroundColor: secondaryBgColor,
+                                    //     color: '#fff', 
+                                    //     borderRadius: '8px', 
+                                    //     padding: '0.5em', 
+                                    //     },
+                                    //     }}
+                                    //     >
+                                    //     <Avatar src={getLocalTypeIcon(t.type.name)}/>
+                                    // </Badge>
                                 )
                         
                     })}
@@ -189,7 +214,7 @@ export default function PokemonVisualizer({ pokemons }) {
 
                     <Box sx={{
                     height: '100%',
-                    width: '40%'
+                    width: 'auto'
                     }}>
                         <CardMedia
                             component="img"
@@ -197,9 +222,9 @@ export default function PokemonVisualizer({ pokemons }) {
                             title={pokemon.name.toUpperCase()}
                             sx={{
                             objectFit: 'contain',
-                            height: '100%',
-                            width: '100%',
-                            alignSelf: 'center'
+                            height: '130px',
+                            width: 'auto',
+                            alignSelf: 'center',
                             }}
                         />
                     </Box>

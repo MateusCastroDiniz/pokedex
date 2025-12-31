@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
+import './assets/style.css'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PokemonVisualizer from './components/pokedex.jsx';
