@@ -227,6 +227,28 @@ export default function PokemonVisualizer({ pokemons }) {
                             alignSelf: 'center',
                             }}
                         />
+                          <CardMedia
+                            component="img"
+                            image={pokemon.sprites.front_default}
+                            title={pokemon.name.toUpperCase()}
+                            sx={{
+                            objectFit: 'contain',
+                            height: '130px',
+                            width: 'auto',
+                            alignSelf: 'center',
+                            }}
+                          />
+                          <CardMedia
+                            component="img"
+                            image={pokemon.sprites.front_default}
+                            title={pokemon.name.toUpperCase()}
+                            sx={{
+                            objectFit: 'contain',
+                            height: '130px',
+                            width: 'auto',
+                            alignSelf: 'center',
+                            }}
+                        />
                     </Box>
                 </Card>
             );

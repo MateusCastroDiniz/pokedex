@@ -72,6 +72,7 @@ function App() {
 
   return (
     <>
+    <img src=''/>
       <CustomAppBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <Stack>
         <PokemonVisualizer pokemons={paginatedPokemons} />
