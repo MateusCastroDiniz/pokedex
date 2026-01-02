@@ -1,0 +1,39 @@
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+#root {
+  margin: 0;
+  padding: 2rem;
+  height: 100vh;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px){
+  #root {
+    width: 100%; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #root {
+    width: 80%; 
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #root {
+    width: 30%; 
+  }
+}  
+
+.card {
+  padding: 2em;
+}
+
+.span_type{
+  background-color: red !important;
+}
