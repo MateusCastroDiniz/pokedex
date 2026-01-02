@@ -10,10 +10,6 @@ import SearchIcon from '@mui/icons-material/Search';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
@@ -51,29 +47,43 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function CustomAppBar({setSearchTerm }) {
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-          <Typography
-            variant="h3"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, fontWeight: 'bold'}}
-          >
-            Pokédex
-          </Typography>
-      <AppBar position="static">
-        <Toolbar>
-          <Search>
+    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', mb:2 }}>
+          
+          <Box sx={{
+            display:'flex',
+            textAlign:'start',
+            paddingY:'1rem'
+          }}>
+            <Typography
+              variant="h3"
+              noWrap
+              component="div"
+              sx={{ 
+                flexGrow: 1, 
+                fontWeight: 'bold'}}
+            >
+              Pokédex
+            </Typography>
+          </Box>
+          <Search 
+            sx={{
+            backgroundColor:"#f2f2f2",
+            paddingY: '5px',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: '100%',
+            borderRadius: '8px',
+            }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Buscar…"
+              placeholder="Buscar..."
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </Search>
-        </Toolbar>
-      </AppBar>
     </Box>
   );
 }
