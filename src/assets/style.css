@@ -1,8 +1,0 @@
-@media screen and (min-width: 769px) and (orientation: landscape) {
-  #pokemon-list{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    background-color: red !important;
-  }
-}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import './App.css'
-import './assets/style.css'
+import './styles/App.css'
+import './styles/style.css'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PokemonVisualizer from './components/pokedex.jsx';
@@ -72,17 +72,16 @@ function App() {
 
   return (
     <>
-    <img src=''/>
       <CustomAppBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <Stack>
         <PokemonVisualizer pokemons={paginatedPokemons} />
       </Stack>
       <Stack sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-      <Pagination
+      <Pagination fullWidth 
       count={Math.ceil(filteredPokemons.length / pokemonsPerPage)}
       page={currentPage}
       onChange={(e, page) => setCurrentPage(page)}
-      sx={{ justifyContent: 'center', margin: '40px' }}
+      sx={{ justifyContent: 'center'}}
       />
       </Stack>
     </>

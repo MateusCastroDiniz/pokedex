@@ -52,16 +52,16 @@ export default function CustomAppBar({setSearchTerm }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
           <Typography
-            variant="h6"
+            variant="h3"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, fontWeight: 'bold'}}
           >
             Pokédex
           </Typography>
+      <AppBar position="static">
+        <Toolbar>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
