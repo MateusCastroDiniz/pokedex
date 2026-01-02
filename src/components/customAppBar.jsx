@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
+import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -47,43 +48,67 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function CustomAppBar({setSearchTerm }) {
 
   return (
-    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', mb:2 }}>
+    <Box 
+    sx={{ 
+      flexGrow: 1, 
+      display: 'flex', 
+      flexDirection: 'column', 
+      justifyContent: 'center', 
+      mb:2 }}>
+      
+      <Box
+      >
+        <IconButton aria-label="Example" sx={{width:'30px', height:'30px'}}>
+          <FontAwesomeIcon icon={faEllipsisV} />
+        </IconButton>
+      </Box>
           
-          <Box sx={{
-            display:'flex',
-            textAlign:'start',
-            paddingY:'1rem'
-          }}>
-            <Typography
-              variant="h3"
-              noWrap
-              component="div"
-              sx={{ 
-                flexGrow: 1, 
-                fontWeight: 'bold'}}
-            >
-              Pokédex
-            </Typography>
-          </Box>
-          <Search 
-            sx={{
-            backgroundColor:"#f2f2f2",
-            paddingY: '5px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: '100%',
-            borderRadius: '8px',
-            }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar..."
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </Search>
+      <Box sx={{
+        display:'flex',
+        flexDirection:'column',
+        textAlign:'start',
+        paddingY:'1rem'
+      }}>
+        <Typography
+          variant="h3"
+          noWrap
+          component="div"
+          sx={{ 
+            flexGrow: 1, 
+            fontWeight: 'bold'}}
+        >
+          Pokédex
+        </Typography>
+        <Typography
+          variant="body1"
+          component="div"
+          sx={{
+            color:'#747476'
+          }}
+        >
+          Procure por um Pokemon pelo nome ou usando o número Nacional Pokédex.
+        </Typography>
+      </Box>
+
+      <Search 
+        sx={{
+        backgroundColor:"#f2f2f2",
+        paddingY: '5px',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        borderRadius: '8px',
+        }}>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Buscar..."
+          inputProps={{ 'aria-label': 'search' }}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </Search>
     </Box>
   );
 }
