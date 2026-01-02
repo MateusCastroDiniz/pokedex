@@ -4,8 +4,10 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+
+import filterIcon from '../assets/icons/filter.svg';
+import genIcon from '../assets/icons/generation.svg';
+import sortIcon from '../assets/icons/sort.svg';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -57,10 +59,26 @@ export default function CustomAppBar({setSearchTerm }) {
       mb:2 }}>
       
       <Box
+        fullWidth
+        sx={{ 
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        gap:'5px'
+      }}
       >
-        <IconButton aria-label="Example" sx={{width:'30px', height:'30px'}}>
-          <FontAwesomeIcon icon={faEllipsisV} />
+        <IconButton aria-label="Filtrar">
+          <img src={genIcon} alt="Filtrar" style={{ width: 24, height: 24 }} />
         </IconButton>
+
+        <IconButton aria-label="Filtrar">
+          <img src={sortIcon} alt="Filtrar" style={{ width: 24, height: 24 }} />
+        </IconButton>
+
+        <IconButton aria-label="Filtrar">
+          <img src={filterIcon} alt="Filtrar" style={{ width: 24, height: 24 }} />
+        </IconButton>
+        
       </Box>
           
       <Box sx={{
