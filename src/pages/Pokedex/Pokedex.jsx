@@ -12,7 +12,7 @@ import {
   Avatar
 } from '@mui/material';
 import Badge from '@mui/material/Badge';
-import PokemonModal from './modal.jsx';
+import PokemonModal from '../../components/Modal/Modal.jsx';
 
 export default function PokemonVisualizer({ pokemons }) {
   const [modalOpen, setModalOpen] = useState(false);

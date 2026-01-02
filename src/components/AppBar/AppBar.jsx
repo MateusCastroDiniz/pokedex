@@ -5,9 +5,9 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 
-import filterIcon from '../assets/icons/filter.svg';
-import genIcon from '../assets/icons/generation.svg';
-import sortIcon from '../assets/icons/sort.svg';
+import filterIcon from '../../assets/icons/filter.svg';
+import genIcon from '../../assets/icons/generation.svg';
+import sortIcon from '../../assets/icons/sort.svg';
 
 
 const Search = styled('div')(({ theme }) => ({
