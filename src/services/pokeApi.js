@@ -18,8 +18,3 @@ export async function getPokemonByNameOrId(term){
     const response = await api.get(`/pokemon/${term}`);
     return response.data;
 }
-
-export async function getPokemonEspecieById(term){
-    const response = await api.get(`/pokemon-species/${term}`);
-    return response.data;
-}
