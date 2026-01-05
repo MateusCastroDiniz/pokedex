@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   getPokemons,
   getPokemonDetails,
-  getPokemonByNameOrId,
+  getPokemonByNameOrId
 } from "../services/pokeApi";
 
 export function usePokemons(pokemonsPerPage = 5) {
@@ -82,6 +82,6 @@ export function usePokemons(pokemonsPerPage = 5) {
     currentPage,
     setCurrentPage,
     totalPages: Math.ceil(filteredPokemons.length / pokemonsPerPage),
-    pokemons: paginatedPokemons,
+    pokemons: paginatedPokemons
   };
 }
