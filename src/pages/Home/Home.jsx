@@ -29,6 +29,7 @@ function Home() {
           <PokemonVisualizer pokemons={pokemons} />
         )}
       </Stack>
+
       <Stack sx={{display:'flex', flexDirection:'column', alignItems:'center', marginY:2, paddingBottom:3}}>
       <Pagination fullWidth 
       count={totalPages}
