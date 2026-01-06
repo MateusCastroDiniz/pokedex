@@ -59,52 +59,61 @@ export const speciesColorScheme = {
   blue: {
     primary: 'rgba(104, 144, 240, 0.85)',   
     soft: 'rgba(104, 144, 240, 0.25)',
+    font_color: '#fff'
   },
 
   brown: {
     primary: 'rgba(184, 144, 96, 0.85)',
     soft: 'rgba(184, 144, 96, 0.25)',
+    font_color: '#fff'
   },
 
   gray: {
     primary: 'rgba(168, 168, 168, 0.85)',
     soft: 'rgba(168, 168, 168, 0.25)',
+    font_color: '#fff'
   },
 
   green: {
     primary: 'rgba(120, 200, 80, 0.85)',
     soft: 'rgba(120, 200, 80, 0.25)',
+    font_color: '#fff'
   },
 
   pink: {
     primary: 'rgba(240, 160, 200, 0.85)',
     soft: 'rgba(240, 160, 200, 0.25)',
+    font_color: '#fff'
   },
 
   purple: {
     primary: 'rgba(160, 120, 200, 0.85)',
     soft: 'rgba(160, 120, 200, 0.25)',
+    font_color: '#fff'
   },
 
   red: {
     primary: 'rgba(240, 80, 80, 0.85)',
     soft: 'rgba(240, 80, 80, 0.25)',
+    font_color: '#fff'
   },
 
   white: {
     primary: 'rgba(245, 245, 245, 0.9)',
     soft: 'rgba(245, 245, 245, 0.4)',
+    font_color: '#2b2b2bff'
   },
 
   yellow: {
     primary: 'rgba(248, 208, 48, 0.85)',
     soft: 'rgba(248, 208, 48, 0.25)',
+    font_color: '#fff'
   }
 }
 
 
-export function getSpeciesColor(colorName){
-  return speciesColorScheme[colorName] || {
+export function getSpecieColor(colorSpecie){
+  return speciesColorScheme[colorSpecie] || {
     primary: 'rgba(200, 200, 200, 0.85)',
     soft: 'rgba(200, 200, 200, 0.25)',
   };
