@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Card,
   Box,
@@ -8,13 +7,10 @@ import {
   Avatar
 } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import { speciesColorScheme, typeColorScheme } from '../../domain/colorScheme.js';
+import { typeColorScheme } from '../../domain/colorScheme.js';
 
 export default function PokemonVisualizer({ pokemons }) {
   const navigate = useNavigate();
-
-
-
   const getLocalTypeIcon = (typeName) => 
     `assets/types/gen8/${typeName.toLowerCase()}.png`;
 
@@ -31,9 +27,6 @@ export default function PokemonVisualizer({ pokemons }) {
           gap: 2
         }}>
           {pokemons.map(pokemon => {
-
-            const bgColor = speciesColorScheme[pokemon.types[0].type.name]?.primary || '#777';
-
             return (
                 <Card
                 key={pokemon.id}
@@ -41,16 +34,13 @@ export default function PokemonVisualizer({ pokemons }) {
                 sx={{
                     display: 'flex',
                     height: '120px',
-                    backgroundColor: bgColor,
+                    backgroundColor: pokemon.colorBase?.primary || 'rgba(200, 200, 200, 0.85)',
                     justifyContent: 'space-between',
                     color: '#333',
                     borderRadius: 4,
                     padding: 1,
                     cursor: 'pointer', 
-                    boxShadow: '0px 0px 20px ' + bgColor.replace('1.0', '0.2'),
-                    '&:hover': {
-                    boxShadow: '0px 0px 20px ' + bgColor.replace('1.0', '0.9'), 
-                    }
+                    
                 }}
                 >
 
@@ -66,7 +56,7 @@ export default function PokemonVisualizer({ pokemons }) {
                                 {`#${pokemon.id}`}
                             </Typography>
 
-                            <Typography variant="h5" sx={{fontWeight: 'bolder', color: '#ffff'}}>
+                            <Typography variant="h5" sx={{fontWeight: 'bolder', color: pokemon.colorBase?.font_color}}>
                                 {pokemon.name.toUpperCase()}
                             </Typography>
                         </Box>
