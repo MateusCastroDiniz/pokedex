@@ -4,6 +4,7 @@ import {
   getPokemonDetails,
   getPokemonByNameOrId
 } from "../services/pokeApi";
+import { getColorBySpecieId } from "../domain/speciesColor";
 
 export function usePokemons(pokemonsPerPage = 5) {
   const [pokemons, setPokemons] = useState([]);
@@ -19,8 +20,16 @@ export function usePokemons(pokemonsPerPage = 5) {
       try {
         const list = await getPokemons(50);
 
-        const details = await Promise.all(
+        let details = await Promise.all(
           list.map((pokemon) => getPokemonDetails(pokemon.url))
+        );
+        
+        
+        details = await Promise.all(
+          details.map(async (pokemon) => {
+            pokemon["colorBase"] = await getColorBySpecieId(pokemon.id);
+            return pokemon;
+          })
         );
 
         setPokemons(details);
