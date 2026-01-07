@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import getPokemonByNameOrId from "../services/pokeApi";
+import {getPokemonByNameOrId, getColorFromSpeciesById} from "../services/pokeApi";
 
 export function usePokemon(nameOrId){
     const [pokemon, setPokemon] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [typeColors, setTypeColor] = useState(null);
-
 
 
     useEffect(() => {
@@ -17,7 +15,10 @@ export function usePokemon(nameOrId){
                 setLoading(true);
                 setError(null);
 
-                const data = await getPokemonByNameOrId(nameOrId);
+                let data = await getPokemonByNameOrId(nameOrId);
+
+                data["colorBase"] = await getColorFromSpeciesById(data.id); 
+
                 setPokemon(data);
 
             } catch(err) {
@@ -27,7 +28,7 @@ export function usePokemon(nameOrId){
             }
         }
         fetchPokemon();
-    }, [nameOrId])
+    }, [])
     
     return {pokemon, loading, error};
 }
