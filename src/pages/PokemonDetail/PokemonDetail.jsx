@@ -1,74 +1,92 @@
-import {Box, Typography} from '@mui/material';
+import {Box, Typography, Button, ButtonGroup} from '@mui/material';
+import {useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {usePokemon} from "../../hooks/usePokemon";
+import PokemonCard from '../../components/PokemonCard/PokemonCard';
 
 
 export default function PokemonDetail() {
-    // const [description, setDescription] = useState('');
-    // const [activeTab, setActiveTab] = useState('about');
-    // const navigate = useNavigate();
-    const {id} = useParams();
+  const [description, setDescription] = useState('');
+  const [activeTab, setActiveTab] = useState('about');
+  
+  const toggleTab = (tab) => setActiveTab(tab);
+  const navigate = useNavigate();
+  const {id} = useParams();
 
-    const {pokemon, loading, error} = usePokemon(id)
+  const {pokemon, loading, error} = usePokemon(id)
 
-    if (loading){
-      return <Typography>Loading...</Typography>;
-    }
+  if (loading){
+    return <Typography>Loading...</Typography>;
+  }
 
-    if (error){
-      return <Typography>(error)...</Typography>;
-    }
+  if (error){
+    return <Typography>{error}...</Typography>;
+  }
 
-    if (!pokemon){
-      return null;
-    }
+  if (!pokemon){
+    return null;
+  }
 
 
 
   return (
+        <Box 
+          sx={{
+            display: 'flex', 
+            flexDirection: 'column', 
+            padding: '2rem', 
+            height: '100%'
+          }}>
+        
+          <Typography variant="body2" onClick={() => navigate(-1)}>Voltar</Typography>
 
-      <Box sx={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        zIndex: '2',
-        transform: 'translate(-50%, -50%)',
-        width: '50vw',
-        height:'70vh',
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-        borderRadius: 2,
-        display:'flex',
-        alignItems: 'center',
-        overflowY: 'auto',
-        overflowX: 'hidden',
-        justifyContent: 'space-between',
-      }}>
+        <Box 
+          sx={{
+            display: 'flex', 
+            flexDirection: 'column', 
+            width: '100%', 
+            height: '100%'
+          }}>
 
-        <Box sx={{display: 'flex', flexDirection: 'column', width: '50%', height: '100%'}}>
-          <Box sx={{marginBottom: '1rem'}}>
-          
-            <Typography variant="h3">
-            {pokemon.name.toUpperCase()} #{pokemon.id}
-            </Typography>
+          <Box 
+            sx={{
+              marginBottom: '1rem'
+            }}>
+
+            <PokemonCard
+              key={pokemon.id} 
+              pokemon={pokemon} 
+            />
 
           </Box>
         
-          {/* <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:'1rem'}}>
-              <ButtonGroup variant="text" aria-label="Basic button group" sx={{display: 'flex', justifyContent: 'space-between'}}>
+          <Box sx={{
+                  width: '100%', 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  marginBottom:'1rem'
+                }}>
+
+              <ButtonGroup 
+              variant="text" 
+              aria-label="Basic button group" 
+              sx={{
+                display: 'flex', 
+                justifyContent: 'space-between'
+                }}>
+                  
                   <Button 
-                    onClick={() => setActiveTab('about')}
+                    onClick={() => toggleTab('about')}
                     sx={{ 
                       borderBottom: activeTab === 'about' ? 2 : 0,
                       borderColor: pokemon.colorBase?.primary
-                    }}
-                  >
+                    }}>
                     About
                   </Button>
+
                   <Button 
-                    onClick={() => setActiveTab('stats')}
+                    onClick={() => toggleTab('stats')}
                     sx={{ 
                       borderBottom: activeTab === 'stats' ? 2 : 0,
                       borderColor: pokemon.colorBase?.primary
@@ -77,7 +95,7 @@ export default function PokemonDetail() {
                     Stats
                   </Button>
                   <Button 
-                    onClick={() => setActiveTab('evolution')}
+                    onClick={() => toggleTab('evolution')}
                     sx={{ 
                       borderBottom: activeTab === 'evolution' ? 2 : 0,
                       borderColor: pokemon.colorBase?.primary
@@ -143,18 +161,10 @@ export default function PokemonDetail() {
                 {pokemon.sprites.other['official-artwork'].front_default}
               </Typography>
             </Box>
-          )}*/}
+          )}
         </Box> 
 
-        {/* <Box sx={{width: '50%', height:'100%', display: 'flex', alignItems: 'center'}}>
-          <Box sx={{height: '35%', width: '35%', display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
-              <img
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-              />
-          </Box>
-        </Box> */}
-      </Box>
+        
+        </Box>
   );
 }
