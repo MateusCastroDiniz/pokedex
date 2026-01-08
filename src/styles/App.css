@@ -7,26 +7,25 @@ body{
 
 #root {
   margin: 0;
-  padding: 2rem;
   height: 100vh;
   text-align: center;
 }
 
-@media screen and (max-width: 480px){
+/* @media screen and (max-width: 480px){
   #root {
-    width: 100%; 
+    width: 100vw; 
   }
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   #root {
-    width: 80%; 
+    width: 100vw; 
   }
-}
+} */
 
 @media screen and (min-width: 1024px) {
   #root {
-    width: 30%; 
+    width: 45%; 
   }
 }  
 
