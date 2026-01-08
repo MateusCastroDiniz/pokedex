@@ -3,15 +3,12 @@ import {useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {usePokemon} from "../../hooks/usePokemon";
 import DetailHeader from '../../components/DetailHeader/DetailHeader';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function PokemonDetail() {
   const [description, setDescription] = useState('');
   const [activeTab, setActiveTab] = useState('about');
   
   const toggleTab = (tab) => setActiveTab(tab);
-  const navigate = useNavigate();
   const {id} = useParams();
 
   const {pokemon, loading, error} = usePokemon(id)
@@ -48,64 +45,59 @@ export default function PokemonDetail() {
                 marginBottom: '1rem',
                 backgroundColor: pokemon.colorBase?.primary || 'rgba(200, 200, 200, 0.85)',
               }}>
-                <Box fullWidth sx={{display: 'flex', flexDirection: 'row', justifyContent:'start'}}>
-                  <IconButton aria-label="fingerprint" onClick={() => navigate(-1)} color="white">
-                    <ArrowBackIcon />
-                  </IconButton>
-                </Box>
 
               <DetailHeader
                 pokemon={pokemon} 
               />
 
+              <Box 
+                sx={{
+                  width: '100%', 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  marginBottom:'1rem',
+                }}>
+
+                  <Box 
+                  variant="text" 
+                  sx={{
+                    width:'80%',
+                    display: 'flex', 
+                    justifyContent: 'space-between',
+                    
+                    }}>
+                      
+                    <Button 
+                    onClick={() => toggleTab('about')}
+                    sx={{ 
+                      border: 'none',
+                      color: activeTab === 'about' ? '#fff': '#ffffff85'
+                    }}>
+                      About
+                    </Button>
+
+                    <Button 
+                    onClick={() => toggleTab('stats')}
+                    sx={{ 
+                      color: activeTab === 'stats' ? '#fff': '#ffffff85'
+                    }}>
+                      Stats
+                    </Button>
+                    
+                    <Button 
+                    onClick={() => toggleTab('evolution')}
+                    sx={{ 
+                      color: activeTab === 'evolution' ? '#fff': '#ffffff85'
+                    }}>
+                      Evolution
+                    </Button>
+
+                  </Box>
+              </Box>
+
             </Box>
           
-            <Box 
-              sx={{
-                width: '100%', 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center', 
-                marginBottom:'1rem'
-              }}>
-
-                <ButtonGroup 
-                variant="text" 
-                aria-label="Basic button group" 
-                sx={{
-                  display: 'flex', 
-                  justifyContent: 'space-between'
-                  }}>
-                    
-                  <Button 
-                  onClick={() => toggleTab('about')}
-                  sx={{ 
-                    borderBottom: activeTab === 'about' ? 2 : 0,
-                    borderColor: pokemon.colorBase?.primary
-                  }}>
-                    About
-                  </Button>
-
-                  <Button 
-                  onClick={() => toggleTab('stats')}
-                  sx={{ 
-                    borderBottom: activeTab === 'stats' ? 2 : 0,
-                    borderColor: pokemon.colorBase?.primary
-                  }}>
-                    Stats
-                  </Button>
-                  
-                  <Button 
-                  onClick={() => toggleTab('evolution')}
-                  sx={{ 
-                    borderBottom: activeTab === 'evolution' ? 2 : 0,
-                    borderColor: pokemon.colorBase?.primary
-                  }}>
-                    Evolution
-                  </Button>
-
-                </ButtonGroup>
-            </Box>
 
             <Box 
             sx={{
@@ -186,9 +178,5 @@ export default function PokemonDetail() {
           </Box> 
       </Stack>
     </Stack>
-
-
-
-
   );
 }
