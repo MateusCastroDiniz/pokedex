@@ -19,10 +19,10 @@ function Home() {
   
 
   return (
-    <>
+    <Stack sx={{width: '100%', minHeight: '100vh', paddingX: 4, paddingY: 2, boxSizing: 'border-box'}}>
       <CustomAppBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       
-      <Stack>
+      <Stack >
         {loading ? (
           <p>Carregando...</p>
         ) : (
@@ -38,7 +38,7 @@ function Home() {
       sx={{ justifyContent: 'center'}}
       />
       </Stack>
-    </>
+    </Stack>
   )
 }
 
