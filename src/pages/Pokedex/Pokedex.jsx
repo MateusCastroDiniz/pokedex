@@ -14,9 +14,7 @@ export default function PokemonVisualizer({ pokemons }) {
   const navigate = useNavigate();
 
   return (
-    <Box id={"pokemons-container"} sx={{
-      width: '100%'
-    }}>
+    <Box id={"pokemons-container"}>
 
       {pokemons.length > 0 ? (
         <Box id={"pokemons-list"} sx={{
@@ -27,7 +25,7 @@ export default function PokemonVisualizer({ pokemons }) {
         }}>
           {pokemons.map(pokemon => {
             return (
-                <PokemonCard
+                <PokemonCard 
                   key={pokemon.id} 
                   pokemon={pokemon} 
                 />
