@@ -57,59 +57,60 @@
 
 export const speciesColorScheme = {
   blue: {
-    primary: 'rgba(104, 144, 240, 0.85)',   
-    soft: 'rgba(104, 144, 240, 0.25)',
+    primary: 'rgb(125, 160, 210)',
+    soft: 'rgba(125, 160, 210, 0.3)',
     font_color: '#fff'
   },
 
   brown: {
-    primary: 'rgba(184, 144, 96, 0.85)',
-    soft: 'rgba(184, 144, 96, 0.25)',
+    primary: 'rgb(160, 135, 110)',
+    soft: 'rgba(160, 135, 110, 0.3)',
     font_color: '#fff'
   },
 
   gray: {
-    primary: 'rgba(168, 168, 168, 0.85)',
-    soft: 'rgba(168, 168, 168, 0.25)',
+    primary: 'rgb(145, 145, 145)',
+    soft: 'rgba(145, 145, 145, 0.3)',
     font_color: '#fff'
   },
 
   green: {
-    primary: 'rgba(120, 200, 80, 0.85)',
-    soft: 'rgba(120, 200, 80, 0.25)',
+    primary: 'rgb(139, 190, 138)',
+    soft: 'rgba(139, 190, 138, 0.3)',
     font_color: '#fff'
   },
 
   pink: {
-    primary: 'rgba(240, 160, 200, 0.85)',
-    soft: 'rgba(240, 160, 200, 0.25)',
+    primary: 'rgb(210, 155, 175)',
+    soft: 'rgba(210, 155, 175, 0.3)',
     font_color: '#fff'
   },
 
   purple: {
-    primary: 'rgba(160, 120, 200, 0.85)',
-    soft: 'rgba(160, 120, 200, 0.25)',
+    primary: 'rgb(170, 145, 200)',
+    soft: 'rgba(170, 145, 200, 0.3)',
     font_color: '#fff'
   },
 
   red: {
-    primary: 'rgba(240, 80, 80, 0.85)',
-    soft: 'rgba(240, 80, 80, 0.25)',
+    primary: 'rgb(200, 120, 120)',
+    soft: 'rgba(200, 120, 120, 0.3)',
     font_color: '#fff'
   },
 
   white: {
-    primary: 'rgba(245, 245, 245, 0.9)',
-    soft: 'rgba(245, 245, 245, 0.4)',
-    font_color: '#2b2b2bff'
+    primary: 'rgb(235, 235, 235)',
+    soft: 'rgba(235, 235, 235, 0.5)',
+    font_color: '#2b2b2b'
   },
 
   yellow: {
-    primary: 'rgba(248, 208, 48, 0.85)',
-    soft: 'rgba(248, 208, 48, 0.25)',
-    font_color: '#fff'
+    primary: 'rgb(215, 190, 100)',
+    soft: 'rgba(215, 190, 100, 0.3)',
+    font_color: '#2b2b2b'
   }
-}
+};
+
 
 
 export function getSpecieColor(colorSpecie){
