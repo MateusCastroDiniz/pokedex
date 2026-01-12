@@ -1,15 +1,17 @@
-import {Box, Typography, Button, ButtonGroup, Stack} from '@mui/material';
+import {Box, Typography, Button, Stack, Grid} from '@mui/material';
 import {useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {usePokemon} from "../../hooks/usePokemon";
 import DetailHeader from '../../components/DetailHeader/DetailHeader';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function PokemonDetail() {
-  const [description, setDescription] = useState('');
   const [activeTab, setActiveTab] = useState('about');
   
   const toggleTab = (tab) => setActiveTab(tab);
   const {id} = useParams();
+  const navigate = useNavigate();
 
   const {pokemon, loading, error} = usePokemon(id)
 
@@ -28,41 +30,64 @@ export default function PokemonDetail() {
 
 
   return (
-    <Stack sx={{width: '100%', minHeight: '100vh', boxSizing: 'border-box'}}>
+    <Stack id={'container'} 
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        boxSizing: 'border-box',
+        backgroundColor: pokemon.colorBase?.primary || 'rgba(200, 200, 200, 0.85)'
+        }}>
 
-      <Stack sx={{display:'flex', flexDirection:'column', alignItems:'center', paddingBottom:3, width: '100%'}}>
+      <Stack 
+        sx={{
+          display:'flex', 
+          flexDirection:'column', 
+          alignItems:'center', 
+          width: '100%', 
+          justifyContent: 'space-between',
+          boxSizing: 'border-box',
+        }}>
           
           <Box 
             sx={{
               display: 'flex', 
-              flexDirection: 'column', 
+              flexDirection: 'column',
+               
               width: '100vw',
-              boxSizing: 'border-box',
+              height: '100vh',
             }}>
 
-            <Box 
+            <Box id={'header'}
               sx={{
-                marginBottom: '1rem',
-                backgroundColor: pokemon.colorBase?.primary || 'rgba(200, 200, 200, 0.85)',
+                padding: '2rem',
+                paddingBottom: 2,
+                backgroundColor: pokemon.colorBase?.primary || 'rgba(200, 200, 200, 0.85)'
+
               }}>
+
+              <Box fullWidth sx={{display: 'flex', flexDirection: 'row', justifyContent:'start'}}>
+                <IconButton aria-label="fingerprint" onClick={() => navigate('/')} color="white">
+                    <ArrowBackIcon />
+                </IconButton>
+              </Box>
 
               <DetailHeader
                 pokemon={pokemon} 
               />
 
               <Box 
+                id={'menu-tabs'}
                 sx={{
                   width: '100%', 
                   display: 'flex', 
                   justifyContent: 'center', 
-                  alignItems: 'center', 
-                  marginBottom:'1rem',
+                  alignItems: 'center',
                 }}>
 
                   <Box 
                   variant="text" 
                   sx={{
-                    width:'80%',
+                    width:'100%',
                     display: 'flex', 
                     justifyContent: 'space-between',
                     
@@ -72,7 +97,8 @@ export default function PokemonDetail() {
                     onClick={() => toggleTab('about')}
                     sx={{ 
                       border: 'none',
-                      color: activeTab === 'about' ? '#fff': '#ffffff85'
+                      color: activeTab === 'about' ? '#fff': '#ffffff85',
+                      fontWeight: activeTab === 'about' ? 'bold': 'regular'
                     }}>
                       About
                     </Button>
@@ -80,7 +106,8 @@ export default function PokemonDetail() {
                     <Button 
                     onClick={() => toggleTab('stats')}
                     sx={{ 
-                      color: activeTab === 'stats' ? '#fff': '#ffffff85'
+                      color: activeTab === 'stats' ? '#fff': '#ffffff85',
+                      fontWeight: activeTab === 'stats' ? 'bold': 'regular'
                     }}>
                       Stats
                     </Button>
@@ -88,7 +115,8 @@ export default function PokemonDetail() {
                     <Button 
                     onClick={() => toggleTab('evolution')}
                     sx={{ 
-                      color: activeTab === 'evolution' ? '#fff': '#ffffff85'
+                      color: activeTab === 'evolution' ? '#fff': '#ffffff85',
+                      fontWeight: activeTab === 'evolution' ? 'bold': 'regular'
                     }}>
                       Evolution
                     </Button>
@@ -99,13 +127,17 @@ export default function PokemonDetail() {
             </Box>
           
 
-            <Box 
+            <Box id={'content'}
             sx={{
-              display: 'flex', 
+              display: 'flex',
+              flexGrow: 1, 
+              borderTopRightRadius: '2rem',
+              borderTopLeftRadius: '2rem',
               justifyContent: 'center', 
-              alignItems: 'center', 
-              marginBottom:'1rem',
-              boxSizing: 'border-box',
+              alignItems: 'top', 
+              padding:'2rem',
+              boxSizing: 'border-box',              
+              backgroundColor: '#fff',
             }}>
                   
               {activeTab === 'about' && (
@@ -113,18 +145,90 @@ export default function PokemonDetail() {
                   <Box 
                   sx={{
                     display:'flex',
-                    flexDirection:'column'
+                    flexDirection:'column',
+                    flexGrow: 1,
                   }}>
-                    <Typography variant='body1'>
-                    <strong>Height:</strong> {pokemon.height / 10} m<br />
-                    <strong>Weight:</strong> {pokemon.weight / 10} kg<br />
-                    <strong>Types:</strong> {pokemon.types.map(t => t.type.name).join(', ')}<br />
-                    <strong>Abilities:</strong> {pokemon.abilities.map(a => a.ability.name).join(', ')}<br />
-                    <strong>Base color: {pokemon.colorBase?.primary}</strong><br />
+                    <Typography variant='body2'>
+                      {pokemon.description}
                     </Typography>
-                    <Typography variant="body1">
-                    <strong>Description:</strong> {description}
-                    </Typography>
+
+                    <Grid container spacing={2}>
+                      
+                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Height
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2">
+                          {pokemon.height / 10}m
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Weight
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2">
+                          {pokemon.weight / 10}m
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Types
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2">
+                          {pokemon.types.map(t => t.type.name).join(', ')}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Abilities
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2">
+                          {pokemon.abilities.map(a => a.ability.name).join(', ')}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Base color:
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2">
+                          {pokemon.colorBase?.primary}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Weaknesses:
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                        {pokemon.typesDetails.map(ty => (
+                          ty.damage_relations.double_damage_from.map(t => t.name).join(", ")
+                        ))}
+                      </Grid>
+                    </Grid>
+
+                    {pokemon.name}
+
                   </Box>
                 </>
               )}
@@ -175,6 +279,7 @@ export default function PokemonDetail() {
               )}
 
             </Box> 
+
           </Box> 
       </Stack>
     </Stack>

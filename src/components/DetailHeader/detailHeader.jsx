@@ -6,8 +6,6 @@ import {
   Avatar,
   Stack
 } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { typeColorScheme } from '../../domain/colorScheme';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,20 +24,11 @@ return(
         width: '100%',
         backgroundColor: pokemon.colorBase?.primary || 'rgba(200, 200, 200, 0.85)',
         justifyContent: 'space-between',
-        color: '#333',
-        borderRadius: 4,
         padding: 3,
         paddingX: 4,
         cursor: 'pointer',  
         boxSizing: 'border-box',
     }}>
-
-    <Box fullWidth sx={{display: 'flex', flexDirection: 'row', justifyContent:'start'}}>
-        <IconButton aria-label="fingerprint" onClick={() => navigate('/')} color="white">
-            <ArrowBackIcon />
-        </IconButton>
-    </Box>
-
 
     <Box
     sx={{
@@ -80,8 +69,8 @@ return(
                 alignItems: 'start'
                 }}>
                 
-                <Typography variant="body1" sx={{fontWeight: 'bold', color: pokemon.baseColor?.font_color }}>
-                    {`#${pokemon.id}`}
+                <Typography variant="body1" sx={{fontWeight: 'bolder', color: `${pokemon.baseColor?.font_color} !important`}}>
+                    #{`${pokemon.id}`}
                 </Typography>
 
                 <Typography variant="h5" sx={{fontWeight: 'bolder', color: pokemon.colorBase?.font_color}}>

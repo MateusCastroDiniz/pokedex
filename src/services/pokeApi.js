@@ -19,7 +19,12 @@ export async function getPokemonByNameOrId(term){
     return response.data;
 }
 
-export async function getColorFromSpeciesById(pokemonId){
+export async function getSpecieDetail(pokemonId){
     const response = await api.get(`/pokemon-species/${pokemonId}`);
-    return response.data.color.name;
+    return response.data;
+}
+
+export async function getTypeDetail(type){
+    const response = await api.get(`/type/${type}`);
+    return response.data;
 }

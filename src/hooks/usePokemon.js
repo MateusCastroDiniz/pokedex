@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {getPokemonByNameOrId} from "../services/pokeApi";
+import {getPokemonByNameOrId, getSpecieDetail, getTypeDetail} from "../services/pokeApi";
 import { getColorBySpecieId } from "../domain/speciesColor";
 
 export function usePokemon(nameOrId){
@@ -19,7 +19,27 @@ export function usePokemon(nameOrId){
 
                 let data = await getPokemonByNameOrId(nameOrId);
 
-                data["colorBase"] = await getColorBySpecieId(data.id); 
+                data.colorBase = await getColorBySpecieId(data.id); 
+                
+                const specieDetail = await getSpecieDetail(data.id);
+                
+                data.typesDetails = await Promise.all(
+                data.types.map(t => getTypeDetail(t.type.name))
+                );
+
+                const specieDescription =
+                specieDetail.flavor_text_entries.find(
+                    entry => entry.language.name == 'pt-br'
+                ) ||
+                specieDetail.flavor_text_entries.find(
+                    entry => entry.language.name == 'en'
+                );
+
+                data.description = specieDescription
+                ? specieDescription.flavor_text.replace(/\f|\n/g, ' ')
+                : 'Descrição não disponível.';
+
+
 
                 setPokemon(data);
 
