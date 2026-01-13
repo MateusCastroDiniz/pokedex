@@ -6,7 +6,7 @@ import {
   Avatar,
   Stack
 } from '@mui/material';
-import { typeColorScheme } from '../../domain/colorScheme';
+import { typeColorScheme } from '../../utils/colorScheme';
 import { useNavigate } from 'react-router-dom';
 
 export default function DetailHeader({pokemon}) {

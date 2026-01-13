@@ -17,11 +17,11 @@ body{
   }
 } */
 
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   #root {
-    width: 100vw; 
+    width: 100%; 
   }
-} */
+}
 
 @media screen and (min-width: 1024px) {
   #root {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {getPokemonByNameOrId, getSpecieDetail, getTypeDetail} from "../services/pokeApi";
-import { getColorBySpecieId } from "../domain/speciesColor";
+import { getColorBySpecieId } from "../utils/speciesColor";
 
 export function usePokemon(nameOrId){
     const [pokemon, setPokemon] = useState(null);
@@ -22,6 +22,35 @@ export function usePokemon(nameOrId){
                 data.colorBase = await getColorBySpecieId(data.id); 
                 
                 const specieDetail = await getSpecieDetail(data.id);
+                
+                const statLabelMap = {
+                hp: 'HP',
+                attack: 'Attack',
+                defense: 'Defense',
+                'special-attack': 'Special Attack',
+                'special-defense': 'Special Defense',
+                speed: 'Speed'
+                };
+
+                const formatGrowthRate = (rate) =>
+                rate.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+                
+                
+                data.meta = {
+                    baseExp: data.base_experience,
+                    evYield: data.stats
+                    .filter(s => s.effort > 0)
+                    .map(s => ({
+                        value: s.effort,
+                        key: s.stat.name,
+                        label: statLabelMap[s.stat.name] ?? s.stat.name
+                    })),
+                    catchRate: specieDetail.capture_rate,
+                    baseFriendship: specieDetail.base_happiness,
+                    growthRate: formatGrowthRate(specieDetail.growth_rate.name)
+                };
+
                 
                 data.typesDetails = await Promise.all(
                 data.types.map(t => getTypeDetail(t.type.name))

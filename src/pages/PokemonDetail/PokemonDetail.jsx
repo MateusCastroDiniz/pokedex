@@ -52,8 +52,7 @@ export default function PokemonDetail() {
             sx={{
               display: 'flex', 
               flexDirection: 'column',
-               
-              width: '100vw',
+              width: '100%',
               height: '100vh',
             }}>
 
@@ -142,92 +141,179 @@ export default function PokemonDetail() {
                   
               {activeTab === 'about' && (
                 <>
+
                   <Box 
                   sx={{
                     display:'flex',
                     flexDirection:'column',
                     flexGrow: 1,
+                    textAlign: 'start',
+                    gap: 2
                   }}>
-                    <Typography variant='body2'>
+
+                    <Typography>
                       {pokemon.description}
                     </Typography>
-
-                    <Grid container spacing={2}>
+                    
+                    <Grid container spacing={1} sx={{paddingY: 2}}>
                       
-                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2" fontWeight={'bold'}>
+                      <Grid size={12} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'}>
+                          Training
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
                           Height
                         </Typography>
                       </Grid>
                       
-                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2">
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography>
                           {pokemon.height / 10}m
                         </Typography>
                       </Grid>
 
-                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2" fontWeight={'bold'}>
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
                           Weight
                         </Typography>
                       </Grid>
                       
-                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2">
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography>
                           {pokemon.weight / 10}m
                         </Typography>
                       </Grid>
 
-                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2" fontWeight={'bold'}>
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
                           Types
                         </Typography>
                       </Grid>
                       
-                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2">
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography>
                           {pokemon.types.map(t => t.type.name).join(', ')}
                         </Typography>
                       </Grid>
 
-                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2" fontWeight={'bold'}>
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
                           Abilities
                         </Typography>
                       </Grid>
                       
-                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2">
-                          {pokemon.abilities.map(a => a.ability.name).join(', ')}
-                        </Typography>
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start', flexDirection: 'column'}}>
+                          
+                          {pokemon.abilities.map((a, idx) => (
+                            <Typography variant={a.is_hidden ? "subtitle2" : "body1"}>
+                              {idx + 1 + '. '+ a.ability.name}
+                              {a.is_hidden && ' (hidden ability)'}
+                              {idx < pokemon.abilities.length - 1 && ','}
+                            </Typography>
+                          ))}
+
                       </Grid>
 
-                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2" fontWeight={'bold'}>
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
                           Base color:
                         </Typography>
                       </Grid>
                       
-                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
                         <Typography variant="body2">
                           {pokemon.colorBase?.primary}
                         </Typography>
                       </Grid>
 
-                      <Grid size={3} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="body2" fontWeight={'bold'}>
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
                           Weaknesses:
                         </Typography>
                       </Grid>
                       
-                      <Grid size={9} sx={{display: 'flex', alignItems: 'start'}}>
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
                         {pokemon.typesDetails.map(ty => (
                           ty.damage_relations.double_damage_from.map(t => t.name).join(", ")
                         ))}
                       </Grid>
                     </Grid>
 
-                    {pokemon.name}
+
+                    <Grid container spacing={1} sx={{paddingTop: 2}}>
+                    
+                      <Grid size={12} sx={{display: 'flex', alignItems: 'start'}}>
+                        
+                        <Typography fontWeight={'bold'}>
+                          Training
+                        </Typography>
+                      </Grid>
+                    
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
+                          Ev Yield
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography>
+                          {pokemon.meta.evYield.map((y) => (
+                            `${y.value} ${y.label}`
+                            ))}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
+                          Catch Rate
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography>
+                          {pokemon.meta.catchRate}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
+                          Base Friendship
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography>
+                          {pokemon.meta.baseFriendship}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography fontWeight={'bold'} variant='subtitle2'>
+                          Base EXP
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start', flexDirection: 'column'}}>  
+                        <Typography>
+                          {pokemon.meta.baseExp}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant='subtitle2' fontWeight={'bold'}>
+                          Base color:
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="body2">
+                          {pokemon.meta.growthRate}
+                        </Typography>
+                      </Grid>
+                    </Grid>
 
                   </Box>
                 </>
@@ -236,32 +322,54 @@ export default function PokemonDetail() {
               {activeTab === 'stats' && (
                 <Box 
                 sx={{
+                  width: '100%',
+                  maxWidth: '100%',
                   display: 'flex',
-                  flexDirection:'column'
+                  flexDirection: 'column',
+                  gap: 2,
+
                 }}>
                   {pokemon.stats.map((stat) => (
-                    <Box key={stat.stat.name} sx={{ marginBottom: '1rem' }}>
-                      <Typography variant="body1">
-                        <strong>{stat.stat.name.toUpperCase()}:</strong> {stat.base_stat}
-                      </Typography>
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: '10px',
-                          bgcolor: '#e0e0e0',
-                          borderRadius: '5px',
-                        }}
-                      >
+                    <Grid container spacing={1} key={stat.stat.name} 
+                    sx={{ 
+                      marginBottom: '1rem',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      paddingY: 2
+                      }}>
+                      
+                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
+                        <Typography variant="subtitle2" fontWeight={'bold'}>
+                          {stat.stat.name}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={8} sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                        <Typography>
+                          {stat.base_stat}
+                        </Typography>
                         <Box
                           sx={{
-                            width: `${(stat.base_stat / 255) * 100}%`,
-                            height: '100%',
-                            bgcolor: pokemon.colorBase?.primary,
+                            width: '100%',
+                            height: '5px',
+                            bgcolor: '#e0e0e0',
                             borderRadius: '5px',
                           }}
-                        />
-                      </Box>
-                    </Box>
+                          >
+                          <Box
+                            sx={{
+                              width: `${(stat.base_stat / 255) * 100}%`,
+                              height: '100%',
+                              bgcolor: pokemon.colorBase?.primary,
+                              borderRadius: '5px',
+                            }}
+                            />
+                        </Box>
+                            <Typography>
+                              teste
+                            </Typography>
+                      </Grid>
+                    </Grid>
                   ))}
                 </Box>
               )}
@@ -269,12 +377,13 @@ export default function PokemonDetail() {
               {activeTab === 'evolution' && (
                 <Box 
                 sx={{
-                  width:'100%'
+                  display:'flex',
+                  flexDirection: 'column',
+                  flexGrow: 1,
                 }}>
                   <Typography>
                     Evolution chain will be implemented here.
                   </Typography>
-                    {pokemon.sprites.other['official-artwork'].front_default}
                 </Box>
               )}
 
