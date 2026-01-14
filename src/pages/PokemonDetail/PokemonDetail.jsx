@@ -1,4 +1,4 @@
-import {Box, Typography, Button, Stack, Grid} from '@mui/material';
+import {Box, Typography, Button, Stack, Grid, Avatar} from '@mui/material';
 import {useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {usePokemon} from "../../hooks/usePokemon";
@@ -12,6 +12,9 @@ export default function PokemonDetail() {
   const toggleTab = (tab) => setActiveTab(tab);
   const {id} = useParams();
   const navigate = useNavigate();
+  const getLocalTypeIcon = (typeName) =>
+  `https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${typeName}.svg`;
+
 
   const {pokemon, loading, error} = usePokemon(id)
 
@@ -325,34 +328,39 @@ export default function PokemonDetail() {
                   width: '100%',
                   maxWidth: '100%',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
+                  flexDirection: 'column'
 
                 }}>
+
+                  <Typography color={pokemon.colorBase?.primary} variant='h6' fontWeight={'bold'} textAlign={'start'}>
+                    Base Stats
+                  </Typography>
+
+                  <Box sx={{paddingY: '10px'}}>
                   {pokemon.stats.map((stat) => (
-                    <Grid container spacing={1} key={stat.stat.name} 
+                    <Grid container spacing={2} key={stat.stat.name} 
                     sx={{ 
-                      marginBottom: '1rem',
+                      paddingY: '7px',
+                      margin: 0,
                       display: 'flex',
-                      flexDirection: 'row',
-                      paddingY: 2
+                      flexDirection: 'row'
                       }}>
                       
-                      <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
-                        <Typography variant="subtitle2" fontWeight={'bold'}>
+                      <Grid size={3} sx={{display: 'flex', justifyContent: 'space-between'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
                           {stat.stat.name}
+                        </Typography>
+
+                        <Typography variant="subtitle1">
+                          {stat.base_stat}
                         </Typography>
                       </Grid>
 
-                      <Grid size={8} sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                        <Typography>
-                          {stat.base_stat}
-                        </Typography>
+                      <Grid size={7} sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                         <Box
                           sx={{
                             width: '100%',
                             height: '5px',
-                            bgcolor: '#e0e0e0',
                             borderRadius: '5px',
                           }}
                           >
@@ -365,17 +373,111 @@ export default function PokemonDetail() {
                             }}
                             />
                         </Box>
-                            <Typography>
-                              {stat.range.min}
-                            </Typography>
+                      </Grid>
 
-                            <Typography>
-                              {stat.range.max}
-                            </Typography>
-                            
+                      <Grid size={1} sx={{display: 'flex', justifyContent: 'center'}}>
+                        <Typography variant="subtitle1">
+                          {stat.range.min}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={1} sx={{display: 'flex', justifyContent: 'center'}}>
+                        <Typography variant="subtitle1">
+                          {stat.range.max}
+                        </Typography>
                       </Grid>
                     </Grid>
                   ))}
+
+                  <Grid container spacing={1}
+                    sx={{ 
+                      marginBottom: '1rem',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      paddingY: 1
+                      }}>
+                      
+                      <Grid size={3} sx={{display: 'flex', justifyContent: 'space-between'}}>
+                        <Typography variant="body2" fontWeight={'bold'}>
+                          Total
+                        </Typography>
+
+                        <Typography variant="subtitle1" fontWeight={'bold'}>
+                          {pokemon.stats.reduce((total, stat) => {
+                            return total + stat.base_stat
+                          }, 0
+                          )}
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={7} sx={{display: 'flex', justifyContent: 'center'}}>
+                        
+                      </Grid>
+
+                      <Grid size={1} sx={{display: 'flex', justifyContent: 'center'}}>
+                        <Typography variant="subtitle2" fontWeight={'bold'}>
+                          Min
+                        </Typography>
+                      </Grid>
+
+                      <Grid size={1} sx={{display: 'flex', justifyContent: 'center'}}>
+                        <Typography variant="subtitle2" fontWeight={'bold'}>
+                          Max
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                    
+                  <Box 
+                  sx={{
+                    width: '100%',
+                    maxWidth: '100%',
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}>
+                    <Typography variant='subtitle2' textAlign={'justify'}>
+                      The ranges shown on the right are for a level 100 Pokémon. Maximum values are based on a beneficial nature, 252 EVs, 31 IVs; minimum values are based on a hindering nature, O EVs, O IVs.
+                    </Typography>
+                  </Box>
+
+                  <Box sx={{
+                    width: '100%',
+                    maxWidth: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    paddingY: 1
+                    }}>
+                    <Typography color={pokemon.colorBase?.primary} variant='h6'   fontWeight={'bold'} textAlign={'start'}>
+                    Base Stats
+                    </Typography>
+
+                    <Box sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      flexWrap: 'wrap'
+                      
+                    }}>
+                      {Object.entries(pokemon.typeEffects).map(([type, value]) => (
+                        <Box sx={{
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }}>
+                          
+                          <Box padding={'10px'} backgroundColor={'red'}>
+                            <Avatar sx={{width: 20, height: 20}} src={getLocalTypeIcon(type)} />
+                          </Box>
+
+                          <Typography key={type}>
+                            {value}×
+                          </Typography>
+                        </Box>
+
+                      ))}
+                    </Box>
+                  </Box>
+                    
+
                 </Box>
               )}
 
