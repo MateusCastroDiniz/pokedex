@@ -7,15 +7,11 @@ import {
   Stack
 } from '@mui/material';
 import { typeColorScheme } from '../../utils/colorScheme';
-import { useNavigate } from 'react-router-dom';
 
 export default function DetailHeader({pokemon}) {
 
 const getLocalTypeIcon = (typeName) =>
   `https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${typeName}.svg`;
-  
-const navigate = useNavigate();
-
 
 return(
 <Stack 
