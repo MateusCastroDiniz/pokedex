@@ -7,7 +7,7 @@ import {
   Typography,
   Avatar
 } from '@mui/material';
-import { typeColorScheme } from '../../domain/colorScheme';
+import { typeColorScheme } from '../../utils/colorScheme';
 
 
 export default function PokemonCard({ pokemon }) {

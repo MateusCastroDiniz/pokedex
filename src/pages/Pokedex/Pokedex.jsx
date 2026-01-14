@@ -7,11 +7,10 @@ import {
   Avatar
 } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import { typeColorScheme } from '../../domain/colorScheme.js';
+import { typeColorScheme } from '../../utils/colorScheme.js';
 import PokemonCard from '../../components/PokemonCard/PokemonCard.jsx';
 
 export default function PokemonVisualizer({ pokemons }) {
-  const navigate = useNavigate();
 
   return (
     <Box id={"pokemons-container"}>

@@ -4,7 +4,7 @@ import {
   getPokemonDetails,
   getPokemonByNameOrId
 } from "../services/pokeApi";
-import { getColorBySpecieId } from "../domain/speciesColor";
+import { getColorBySpecieId } from "../utils/speciesColor";
 
 export function usePokemons(pokemonsPerPage = 5) {
   const [pokemons, setPokemons] = useState([]);
