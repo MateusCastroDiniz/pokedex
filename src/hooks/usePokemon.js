@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {getPokemonByNameOrId, getSpecieDetail, getTypeDetail} from "../services/pokeApi";
 import { getColorBySpecieId } from "../utils/speciesColor";
 import {statRangeCalc} from "../utils/statRangeCalc"
+import { calculateTypeEffectiveness } from "../utils/calcTypeEffectiveness";
 
 export function usePokemon(nameOrId){
     const [pokemon, setPokemon] = useState(null);
@@ -28,9 +29,12 @@ export function usePokemon(nameOrId){
                 hp: 'HP',
                 attack: 'Attack',
                 defense: 'Defense',
-                'special-attack': 'Special Attack',
-                'special-defense': 'Special Defense',
                 speed: 'Speed'
+                };
+
+                const statWrapMap = {
+                'special-attack': 'Sp. Atk.',
+                'special-defense': 'Sp. Def.',
                 };
 
                 const formatGrowthRate = (rate) =>
@@ -38,6 +42,8 @@ export function usePokemon(nameOrId){
 
                 data.stats = data.stats.map(s => {
                     const isHP = s.stat.name === "hp";
+
+                    s.stat.name = statLabelMap[s.stat.name] ?? statWrapMap[s.stat.name]
 
                     return{
                         ...s,
@@ -63,6 +69,8 @@ export function usePokemon(nameOrId){
                 data.typesDetails = await Promise.all(
                 data.types.map(t => getTypeDetail(t.type.name))
                 );
+
+                data.typeEffects = calculateTypeEffectiveness(data.typesDetails)
 
                 const specieDescription =
                 specieDetail.flavor_text_entries.find(
