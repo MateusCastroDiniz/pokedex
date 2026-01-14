@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {getPokemonByNameOrId, getSpecieDetail, getTypeDetail} from "../services/pokeApi";
 import { getColorBySpecieId } from "../utils/speciesColor";
+import {statRangeCalc} from "../utils/statRangeCalc"
 
 export function usePokemon(nameOrId){
     const [pokemon, setPokemon] = useState(null);
@@ -35,7 +36,14 @@ export function usePokemon(nameOrId){
                 const formatGrowthRate = (rate) =>
                 rate.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-                
+                data.stats = data.stats.map(s => {
+                    const isHP = s.stat.name === "hp";
+
+                    return{
+                        ...s,
+                        range: statRangeCalc(s.base_stat, isHP)
+                    }
+                })
                 
                 data.meta = {
                     baseExp: data.base_experience,

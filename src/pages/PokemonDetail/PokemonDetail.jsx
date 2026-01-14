@@ -358,7 +358,7 @@ export default function PokemonDetail() {
                           >
                           <Box
                             sx={{
-                              width: `${(stat.base_stat / 255) * 100}%`,
+                              width: `${(stat.base_stat / stat.range.min) * 100}%`,
                               height: '100%',
                               bgcolor: pokemon.colorBase?.primary,
                               borderRadius: '5px',
@@ -366,8 +366,13 @@ export default function PokemonDetail() {
                             />
                         </Box>
                             <Typography>
-                              teste
+                              {stat.range.min}
                             </Typography>
+
+                            <Typography>
+                              {stat.range.max}
+                            </Typography>
+                            
                       </Grid>
                     </Grid>
                   ))}
