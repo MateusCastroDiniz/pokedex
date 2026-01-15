@@ -17,7 +17,7 @@ export default function PokemonCard({ pokemon }) {
 
   return(
       <Card
-      onClick={() => navigate(`/pokemon/${pokemon.id}`)}
+      onClick={() => navigate(`/pokedex/pokemon/${pokemon.id}`)}
       sx={{
           display: 'flex',
           height: '120px',

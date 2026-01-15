@@ -2,7 +2,7 @@ import '../../styles/App.css'
 import '../../styles/style.css'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import PokemonVisualizer from '../Pokedex/Pokedex.jsx';
+import PokemonList from '../../components/pokemonList/pokemonList.jsx';
 import CustomAppBar from '../../components/AppBar/AppBar.jsx';
 import { usePokemons } from '../../hooks/usePokemons.js';
 
@@ -26,7 +26,7 @@ function Home() {
         {loading ? (
           <p>Carregando...</p>
         ) : (
-          <PokemonVisualizer pokemons={pokemons} />
+          <PokemonList pokemons={pokemons} />
         )}
       </Stack>
 

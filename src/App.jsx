@@ -7,8 +7,8 @@ import PokemonDetail from './pages/PokemonDetail/PokemonDetail';
 function App() {
   return(
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/pokemon/:id" element={<PokemonDetail/>}/>
+      <Route path="/pokedex" element={<Home />} />
+      <Route path="/pokedex/pokemon/:id" element={<PokemonDetail/>}/>
     </Routes>
   );
 }

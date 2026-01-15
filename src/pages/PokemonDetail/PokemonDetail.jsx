@@ -71,7 +71,7 @@ export default function PokemonDetail() {
               }}>
 
               <Box fullWidth sx={{display: 'flex', flexDirection: 'row', justifyContent:'start'}}>
-                <IconButton aria-label="fingerprint" onClick={() => navigate('/')} color="white">
+                <IconButton aria-label="fingerprint" onClick={() => navigate('/pokedex')} color="white">
                     <ArrowBackIcon color='#fff' />
                 </IconButton>
               </Box>

@@ -8,9 +8,9 @@ import {
 } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import { typeColorScheme } from '../../utils/colorScheme.js';
-import PokemonCard from '../../components/PokemonCard/PokemonCard.jsx';
+import PokemonCard from '../PokemonCard/PokemonCard.jsx';
 
-export default function PokemonVisualizer({ pokemons }) {
+export default function PokemonList({ pokemons }) {
 
   return (
     <Box id={"pokemons-container"}>
