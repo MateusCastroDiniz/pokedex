@@ -215,7 +215,7 @@ export default function PokemonDetail() {
                         <Grid size={8} sx={{display: 'flex', alignItems: 'start', flexDirection: 'column'}}>
                             
                             {pokemon.abilities.map((a, idx) => (
-                              <Typography variant={a.is_hidden ? "subtitle2" : "body1"}>
+                              <Typography variant={a.is_hidden ? "body2" : "body1"}>
                                 {idx + 1 + '. '+ a.ability.name}
                                 {a.is_hidden && ' (hidden ability)'}
                                 {idx < pokemon.abilities.length - 1 && ','}
@@ -231,7 +231,7 @@ export default function PokemonDetail() {
                         </Grid>
                         
                         <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
-                          <Typography variant="body2">
+                          <Typography>
                             {pokemon.colorBase?.primary}
                           </Typography>
                         </Grid>
@@ -319,12 +319,12 @@ export default function PokemonDetail() {
 
                         <Grid size={4} sx={{display: 'flex', alignItems: 'start'}}>
                           <Typography variant='subtitle2' fontWeight={'bold'}>
-                            Base color:
+                            Growth rate:
                           </Typography>
                         </Grid>
                         
                         <Grid size={8} sx={{display: 'flex', alignItems: 'start'}}>
-                          <Typography variant="body2">
+                          <Typography>
                             {pokemon.meta.growthRate}
                           </Typography>
                         </Grid>
@@ -371,7 +371,7 @@ export default function PokemonDetail() {
                         <Box
                           sx={{
                             width: '100%',
-                            height: '5px',
+                            height: '4px',
                             borderRadius: '5px',
                           }}
                           >
@@ -447,7 +447,7 @@ export default function PokemonDetail() {
                     display: 'flex',
                     flexDirection: 'column'
                   }}>
-                    <Typography variant='subtitle2' textAlign={'justify'}>
+                    <Typography variant='body2' textAlign={'justify'}>
                       The ranges shown on the right are for a level 100 Pokémon. Maximum values are based on a beneficial nature, 252 EVs, 31 IVs; minimum values are based on a hindering nature, O EVs, O IVs.
                     </Typography>
                   </Box>
