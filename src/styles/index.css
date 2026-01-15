@@ -4,7 +4,6 @@
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
   background-color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
@@ -22,7 +21,6 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  font-family: var(--font-family);
 }
 
 h1 {
