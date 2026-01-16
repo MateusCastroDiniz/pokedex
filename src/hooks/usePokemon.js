@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import {getPokemonByNameOrId, getSpecieDetail, getTypeDetail} from "../services/pokeApi";
+import {getEvolutionChain, getPokemonByNameOrId, getSpecieDetail, getTypeDetail} from "../services/pokeApi";
 import { getColorBySpecieId } from "../utils/speciesColor";
 import {statRangeCalc} from "../utils/statRangeCalc"
 import { calculateTypeEffectiveness } from "../utils/calcTypeEffectiveness";
-import { getTypeColor } from "../utils/colorScheme";
+import {buildEvoTree, flattenEvolution} from '../utils/pokemonEvolution'
 
 export function usePokemon(nameOrId){
     const [pokemon, setPokemon] = useState(null);
@@ -93,6 +93,9 @@ export function usePokemon(nameOrId){
                 ? specieDescription.flavor_text.replace(/\f|\n/g, ' ')
                 : 'Descrição não disponível.';
 
+                const evolution = await getEvolutionChain(specieDetail.evolution_chain.url)
+
+                data.evoTree = buildEvoTree(evolution.chain)
 
 
                 setPokemon(data);
