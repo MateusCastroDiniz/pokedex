@@ -24,6 +24,11 @@ export async function getSpecieDetail(pokemonId){
     return response.data;
 }
 
+export async function getEvolutionChain(url){
+    const response = await api.get(url);
+    return response.data;
+}
+
 export async function getTypeDetail(type){
     const response = await api.get(`/type/${type}`);
     return response.data;
