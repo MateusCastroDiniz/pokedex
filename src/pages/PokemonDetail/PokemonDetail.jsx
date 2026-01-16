@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getTypeColor } from '../../utils/colorScheme';
 import {formatPokemonNames} from '../../utils/formatPokemonNames'
+import EvolutionNode from '../../components/EvolutionNode/EvolutionNode';
 
 
 export default function PokemonDetail() {
@@ -520,9 +521,7 @@ export default function PokemonDetail() {
                   flexDirection: 'column',
                   flexGrow: 1,
                 }}>
-                  <Typography>
-                    Evolution chain will be implemented here.
-                  </Typography>
+                  <EvolutionNode node={pokemon.evoTree}/>
                 </Box>
               )}
 
