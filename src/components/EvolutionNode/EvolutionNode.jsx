@@ -24,11 +24,20 @@ export default function EvolutionNode({ node }) {
           {node.name}
         </Typography>
 
+        <Typography fontWeight="bold" sx={{ textTransform: 'capitalize' }}>
+          {node.pokemon_detail.species.name}
+        </Typography>
+          
+
+        
+
         {node.trigger && (
           <Typography variant="caption" color="text.secondary">
             Evolves by {node.trigger.replace('-', ' ')}
           </Typography>
         )}
+
+
       </Box>
 
       {/* Filhos */}
