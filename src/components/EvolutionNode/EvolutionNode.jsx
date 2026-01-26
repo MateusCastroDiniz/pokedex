@@ -1,4 +1,4 @@
-import {Box, Typography} from '@mui/material';
+import {Box, Typography, Avatar} from '@mui/material';
 
 export default function EvolutionNode({ node }) {
   return (
@@ -13,29 +13,39 @@ export default function EvolutionNode({ node }) {
       {/* Pokémon */}
       <Box
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
           padding: 2,
           borderRadius: 2,
           backgroundColor: '#f5f5f5',
           minWidth: 120,
-          textAlign: 'center'
+          textAlign: 'center',
+          alignItems: 'center',
         }}
       >
+        <Avatar src={node.pokemon_detail.sprites.other.dream_world.front_default || pokemon.sprites.other['official-artwork'].front_default}
+        sx={{
+          width: 80,
+          height: 'auto',
+          marginBottom: 1,
+          objectFit:'contain'  
+        }} 
+        />
+        
         <Typography fontWeight="bold" sx={{ textTransform: 'capitalize' }}>
           {node.name}
         </Typography>
-
-        <Typography fontWeight="bold" sx={{ textTransform: 'capitalize' }}>
-          {node.pokemon_detail.species.name}
-        </Typography>
           
 
-        
-
-        {node.trigger && (
           <Typography variant="caption" color="text.secondary">
-            Evolves by {node.trigger.replace('-', ' ')}
+            teste {node.min_level ? `Level ${node.min_level}` : ''}
           </Typography>
-        )}
+
+          {node.trigger && (
+            <Typography variant="caption" color="text.secondary">
+              Evolves by {node.trigger.replace('-', ' ')}
+            </Typography>
+          )}
 
 
       </Box>

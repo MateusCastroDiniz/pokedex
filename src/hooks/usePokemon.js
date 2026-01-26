@@ -3,7 +3,7 @@ import {getEvolutionChain, getPokemonByNameOrId, getSpecieDetail, getTypeDetail}
 import { getColorBySpecieId } from "../utils/speciesColor";
 import {statRangeCalc} from "../utils/statRangeCalc"
 import { calculateTypeEffectiveness } from "../utils/calcTypeEffectiveness";
-import {buildEvoTree, flattenEvolution} from '../utils/pokemonEvolution'
+import {buildEvoTree, enrichEvoTree} from '../utils/pokemonEvolution'
 
 export function usePokemon(nameOrId){
     const [pokemon, setPokemon] = useState(null);
@@ -94,8 +94,9 @@ export function usePokemon(nameOrId){
                 : 'Descrição não disponível.';
 
                 const evolution = await getEvolutionChain(specieDetail.evolution_chain.url)
+                const evoTree = buildEvoTree(evolution.chain) 
 
-                data.evoTree = buildEvoTree(evolution.chain)
+                data.evoTree = await enrichEvoTree(evoTree);
 
 
                 setPokemon(data);

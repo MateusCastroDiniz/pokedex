@@ -20,8 +20,21 @@ export function flattenEvolution(node, parent = null, result = []) {
 export function buildEvoTree(chainNode){
   return{
     name: chainNode.species.name,
-    pokemon_detail: getPokemonByNameOrId(chainNode.species.name),
     trigger: chainNode.evolution_details?.[0]?.trigger.name ?? null,
+    min_level: chainNode.evolutin_details?.[0]?.min_level ?? null,
     children: chainNode.evolves_to.map(buildEvoTree)
   };
+}
+
+
+export async function enrichEvoTree(node) {
+  const pokemonDetail = await getPokemonByNameOrId(node.name)
+
+  return{
+    ...node,
+    pokemon_detail: pokemonDetail,
+    children: await Promise.all(
+      node.children.map(enrichEvoTree)
+    )
+  }
 }
