@@ -18,12 +18,15 @@ export function flattenEvolution(node, parent = null, result = []) {
 }
 
 export function buildEvoTree(chainNode){
+
+  const evoDetails = chainNode.evolution_details?.[0];
+
   return{
-    name: chainNode.species.name,
-    trigger: chainNode.evolution_details?.[0]?.trigger.name ?? null,
-    min_level: chainNode.evolutin_details?.[0]?.min_level ?? null,
+    name:chainNode.species.name,
+    trigger: evoDetails?.trigger.name ?? null,
+    min_level: evoDetails?.min_level ?? null,
     children: chainNode.evolves_to.map(buildEvoTree)
-  };
+  }
 }
 
 

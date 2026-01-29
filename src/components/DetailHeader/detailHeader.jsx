@@ -1,5 +1,6 @@
 import {
   Box,
+  Card,
   CardActions,
   CardMedia,
   Typography,
@@ -26,12 +27,15 @@ return(
         boxSizing: 'border-box',
     }}>
 
-    <Box
+    <Card
     sx={{
         display:'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        gap: 4
+        gap: 4,
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        alignItems: 'center',
     }}>
 
         <Box sx={{
@@ -111,7 +115,7 @@ return(
             </Box>
 
         </Box>
-    </Box>
+    </Card>
 
     
 </Stack>

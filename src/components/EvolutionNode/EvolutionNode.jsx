@@ -10,11 +10,14 @@ export default function EvolutionNode({ node }) {
         gap: 2
       }}
     >
+      
+
       {/* Pokémon */}
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          gap: 1,
           padding: 2,
           borderRadius: 2,
           backgroundColor: '#f5f5f5',
@@ -23,6 +26,7 @@ export default function EvolutionNode({ node }) {
           alignItems: 'center',
         }}
       >
+
         <Avatar src={node.pokemon_detail.sprites.other.dream_world.front_default || pokemon.sprites.other['official-artwork'].front_default}
         sx={{
           width: 80,
@@ -37,9 +41,6 @@ export default function EvolutionNode({ node }) {
         </Typography>
           
 
-          <Typography variant="caption" color="text.secondary">
-            teste {node.min_level ? `Level ${node.min_level}` : ''}
-          </Typography>
 
           {node.trigger && (
             <Typography variant="caption" color="text.secondary">
@@ -47,6 +48,13 @@ export default function EvolutionNode({ node }) {
             </Typography>
           )}
 
+          {
+            node.min_level &&(
+              <Typography variant="caption" color="text.secondary">
+                ({node.min_level ? `Level ${node.min_level}` : ''})
+              </Typography>
+            )
+          }
 
       </Box>
 
